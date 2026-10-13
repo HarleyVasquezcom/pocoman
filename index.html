@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="color-scheme" content="dark">
+<title>PocoMan · 1000 Levels</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="hud">
+    <div class="hud-item"><span class="label">LEVEL</span><span id="hud-level" class="value">1</span></div>
+    <div class="hud-item"><span class="label">TIER</span><span id="hud-tier" class="value">Easy</span></div>
+    <div class="hud-item"><span class="label">PAR</span><span id="hud-par" class="value">–</span></div>
+    <div class="hud-item"><span class="label">PUSHES</span><span id="hud-pushes" class="value">0</span></div>
+    <div class="hud-item"><span class="label">LEFT</span><span id="hud-left" class="value">0</span></div>
+  </header>
+
+  <div id="stage">
+    <div id="frame">
+      <canvas id="game" width="448" height="448"></canvas>
+
+      <div id="screen-menu" class="overlay active">
+        <div class="panel">
+          <h1 class="title">POCOMAN</h1>
+          <div class="subtitle">1000 LEVELS</div>
+          <p class="tagline">Push every treasure onto its mark.<br>1000 hand-feeling puzzles — easy to master, all solvable.</p>
+          <button id="btn-start" class="btn primary">START</button>
+          <button id="btn-continue" class="btn hidden">CONTINUE</button>
+          <button id="btn-levels" class="btn">LEVEL SELECT</button>
+          <button id="btn-help" class="btn">HOW TO PLAY</button>
+          <div class="hint">Arrows / WASD · Z undo · R restart · F solve · M mute · Esc back</div>
+        </div>
+      </div>
+
+      <div id="screen-levels" class="overlay">
+        <div class="panel wide">
+          <h2>LEVEL SELECT</h2>
+          <div class="pager">
+            <button id="pg-prev" class="pgbtn" aria-label="previous page">‹</button>
+            <span id="pg-label">1 – 100 / 1000</span>
+            <button id="pg-next" class="pgbtn" aria-label="next page">›</button>
+          </div>
+          <div id="level-grid" class="level-grid"></div>
+          <button id="btn-levels-back" class="btn">BACK</button>
+        </div>
+      </div>
+
+      <div id="screen-help" class="overlay">
+        <div class="panel">
+          <h2>HOW TO PLAY</h2>
+          <ul class="help-list">
+            <li><b>Goal</b> — push every treasure box onto a glowing mark.</li>
+            <li><b>Push only</b> — you can push a box but never pull it. Plan ahead!</li>
+            <li><b>One at a time</b> — only one box per push; boxes block each other.</li>
+            <li><b>Stuck?</b> — a box shoved into a corner is usually lost. Undo (Z) or Restart (R).</li>
+            <li><b>Par</b> — the fewest pushes needed. Shown only when the solver proved it.</li>
+            <li><b>Solve</b> — press F to auto-play the stored solution.</li>
+            <li><b>1000 levels</b> — 9 tiers from Easy to Master. Boards grow, boxes multiply, and layouts twist from open rooms into braided mazes and packed chambers.</li>
+          </ul>
+          <div class="hint">Move: ← ↑ → ↓ or W A S D · Undo: Z · Restart: R · Solve: F · Pause: P</div>
+          <button id="btn-help-back" class="btn">BACK</button>
+        </div>
+      </div>
+
+      <div id="screen-pause" class="overlay">
+        <div class="panel">
+          <h2>PAUSED</h2>
+          <button id="btn-resume" class="btn primary">RESUME</button>
+          <button id="btn-restart" class="btn">RESTART LEVEL</button>
+          <button id="btn-quit" class="btn">QUIT TO MENU</button>
+        </div>
+      </div>
+
+      <div id="screen-win" class="overlay">
+        <div class="panel">
+          <h2 class="gold">LEVEL CLEAR!</h2>
+          <div class="stat" id="win-pushes">PUSHES 0</div>
+          <div class="stat" id="win-par">PAR –</div>
+          <div class="stat" id="win-rank"></div>
+          <button id="btn-next" class="btn primary">NEXT LEVEL</button>
+          <button id="btn-win-menu" class="btn">MENU</button>
+        </div>
+      </div>
+
+      <div id="screen-loading" class="overlay">
+        <div class="panel">
+          <div class="spinner"></div>
+          <div class="stat">GENERATING LEVEL…</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="controls">
+    <div class="touch">
+      <button class="tbtn up" data-dir="0">▲</button>
+      <button class="tbtn left" data-dir="3">◀</button>
+      <button class="tbtn right" data-dir="1">▶</button>
+      <button class="tbtn down" data-dir="2">▼</button>
+      <button class="tbtn act" data-act="undo">UNDO</button>
+      <button class="tbtn act" data-act="reset">RESET</button>
+      <button class="tbtn act" data-act="pause">PAUSE</button>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <span>← ↑ → ↓ / WASD move</span>
+    <span>Z undo</span>
+    <span>R restart</span>
+    <span>F solve</span>
+    <span>P pause</span>
+    <span id="mute-ind"></span>
+  </footer>
+
+</div>
+
+<script src="js/rng.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/render.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
