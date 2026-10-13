@@ -44,7 +44,16 @@ body {
 
 /* ---------- STAGE ---------- */
 #stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
-#frame { position: relative; }
+/* The frame must never shrink below the overlay panels' needs. A 6x6 board
+   renders a ~200px canvas; without this floor the menu/pause/win overlays
+   collapse to that size and scroll. The canvas centres inside the frame, so a
+   small board simply floats on the backdrop. min() keeps tiny viewports safe. */
+#frame {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-width: min(460px, 100vw - 24px);
+  min-height: min(490px, 100vh - 140px);
+}
 #game {
   display: block; background: #04060f;
   border: 2px solid rgba(90, 120, 255, 0.25);
